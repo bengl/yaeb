@@ -5,7 +5,9 @@ const remote = require('electron').remote
 let urlBar
 global.yaeb = {
   profile: process.env.YAEB_PROFILE || 'default',
-  newTabUrl: 'https://www.google.com'
+  newTabUrl: 'https://www.google.com',
+  get views() { return views() },
+  get tabs() { return tabs() }
 }
 
 let focusedView = -1
