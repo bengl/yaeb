@@ -1,0 +1,42 @@
+{
+  "name": "yaeb",
+  "productName": "yaeb",
+  "version": "0.0.0",
+  "description": "Minimalist electron browser",
+  "license": "MIT",
+  "repository": "git@github.com:bengl/yaeb.git",
+  "bugs": {
+    "url": "https://github.com/bengl/yaeb/issues"
+  },
+  "homepage": "https://github.com/bengl/yaeb#readme",
+
+  "author": "Bryan English <bryan@bryanenglish.com>",
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --app-version=$npm_package_version --prune --asar --overwrite --all"
+  },
+  "keywords": [
+    "electron-app",
+    "electron",
+    "browser",
+    "minimalist"
+  ],
+  "dependencies": {
+    "electron-debug": "^1.0.0",
+    "mousetrap": "^1.6.0"
+  },
+  "devDependencies": {
+    "devtron": "^1.1.0",
+    "electron": "^1.0.1",
+    "electron-packager": "^7.0.0",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
