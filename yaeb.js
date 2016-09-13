@@ -90,6 +90,7 @@ function addTabToBar(n, view) {
   tabButton.innerText = title
   tabButton.classList.add('tab')
   tabButton.classList.add(`profile-${yaeb.profile}`)
+  tabButton.addEventListener('click', () => focusView(n))
   document.getElementById('tabs').appendChild(tabButton)
 
   view.addEventListener('page-title-updated', (title) => {
