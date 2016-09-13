@@ -3,11 +3,14 @@ require('mousetrap/plugins/global-bind/mousetrap-global-bind')
 
 const remote = require('electron').remote
 let urlBar, profileBar
+
 global.yaeb = {
   profile: process.env.YAEB_PROFILE || 'default',
   newTabUrl: 'https://www.google.com',
   get views() { return views() },
   get tabs() { return tabs() },
+  get focused() { return focusedView },
+  set focused(n) { focusView(n) },
   keyBind: keyBind
 }
 

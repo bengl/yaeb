@@ -90,6 +90,7 @@ There is a global `yaeb` object with the following properties.
 * `views`: All of the `<webview>` DOM objects in an array, in the same order as tabs.
 * `tabs`: All of the tabs as DOM objects, in an array.
 * `keyBind`: Bind a key combo to an action. See Keybindings section above.
+* `focused`: Index of the focused tab. Setting this will set the focus.
 
 ## Contributing
 
