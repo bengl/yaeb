@@ -1,4 +1,3 @@
-* configurable keybindings HIGH
 * spy mode LOW
 * clickable tabs LOW
 * find in page HIGH

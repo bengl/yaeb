@@ -7,20 +7,42 @@ global.yaeb = {
   profile: process.env.YAEB_PROFILE || 'default',
   newTabUrl: 'https://www.google.com',
   get views() { return views() },
-  get tabs() { return tabs() }
+  get tabs() { return tabs() },
+  keyBind: keyBind
 }
 
 let focusedView = -1
-Mousetrap.bind('alt+b', () => currentView().goBack())
-Mousetrap.bind('alt+n', () => currentView().goForward())
-Mousetrap.bind('alt+r', () => currentView().reload())
-Mousetrap.bind('alt+s', () => stop())
-Mousetrap.bind('alt+t', () => newTab())
-Mousetrap.bind('alt+q', closeTab)
-Mousetrap.bind('alt+left', () => goTab(-1))
-Mousetrap.bind('alt+right', () => goTab(1))
-Mousetrap.bindGlobal('alt+u', toggleUrlBar)
-Mousetrap.bindGlobal('alt+y', toggleProfileBar)
+
+const keyBindingActions = {
+  'back': () => currentView().goBack(),
+  'forward': () => currentView().goForward(),
+  'reload': () => currentView().reload(),
+  'stop': () => stop(),
+  'tabnew': () => newTab(),
+  'tabclose': closeTab,
+  'tableft': () => goTab(-1),
+  'tabright': () => goTab(1),
+  'toggleurlbar': toggleUrlBar,
+  'toggleprofilebar': toggleProfileBar
+}
+const keyMap = {} // mostly for help/debug
+
+function keyBind(combo, action) {
+  Mousetrap.bindGlobal(combo, keyBindingActions[action])
+  keyMap[action] = combo
+}
+
+// default keybindings
+keyBind('alt+b', 'back')
+keyBind('alt+n', 'forward')
+keyBind('alt+r', 'reload')
+keyBind('alt+s', 'stop')
+keyBind('alt+t', 'tabnew')
+keyBind('alt+q', 'tabclose')
+keyBind('alt+left', 'tableft')
+keyBind('alt+right', 'tabright')
+keyBind('alt+u', 'toggleurlbar')
+keyBind('alt+y', 'toggleprofilebar')
 
 function goTab(to) {
   const n = focusedView + to > views().length - 1 ?
@@ -178,3 +200,8 @@ if (fs.existsSync(browserCss)) {
   styleTag.setAttribute('href', `file://${browserCss}`)
   document.head.appendChild(styleTag)
 }
+const remoteLog = remote.getGlobal('console').log
+remoteLog('Key Bindings')
+remoteLog('============')
+for (let action in keyMap)
+  remoteLog(action, ':', keyMap[action])

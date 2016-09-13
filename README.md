@@ -22,7 +22,8 @@ Until a real release is ready, you'll have to clone this repo, then `npm i` and
 
 ## Usage
 
-These keybindings will soon be remappable, but here are the defaults:
+These keybindings are remappable (see Keybindings section, but here are the
+defaults:
 
 * Alt+T: New tab
 * Alt+Q: Close tab
@@ -61,6 +62,18 @@ This file is run inside the Electron window, after all the Yaeb scaffolding code
 has run. It's running outside of all the `<webview>`s, so you can manipluate
 them, their associated tabs, etc. See the API section for details.
 
+#### Keybindings
+
+You can set keybindings in `browser.js` by calling
+`yaeb.keyBind(combo, action)`. A full list of available actions is shown in the
+terminal upon starting yaeb. Key combinations use the
+[Mousetrap](https://craig.is/killing/mice) syntax. For example, the following
+binds Ctrl+Alt+Esc to the 'back' action.
+
+```js
+yaeb.keyBind('ctrl+alt+esc', 'back')
+```
+
 ### `<configPath>/browser.css`
 
 This css is file is loaded after the builtin css for the browser itself. This
@@ -76,6 +89,7 @@ There is a global `yaeb` object with the following properties.
 * `newTabUrl`: The new tab URL. Defaults to `http://www.google.com`.
 * `views`: All of the `<webview>` DOM objects in an array, in the same order as tabs.
 * `tabs`: All of the tabs as DOM objects, in an array.
+* `keyBind`: Bind a key combo to an action. See Keybindings section above.
 
 ## Contributing
 
