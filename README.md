@@ -9,6 +9,12 @@ needed either out of the box with keyboard shortcuts, or available via an API
 for addindg whatever customizations you like. The only UI that's visible by
 default upon startup is the tabs bar.
 
+## Features
+
+* Tabs
+* Separate profiles/persistent-sessions, just like with Chrome.
+* Keyboard shortcuts for everything.
+
 ## Installation
 
 Until a real release is ready, you'll have to clone this repo, then `npm i` and
@@ -22,6 +28,7 @@ These keybindings will soon be remappable, but here are the defaults:
 * Alt+Q: Close tab
 * Alt+Left/Right: Move between tabs
 * Alt+U: Toggle showing URL bar (no searching yet)
+* Alt+Y: Set profile for new tabs
 * Alt+B: Back
 * Alt+N: Forward
 * Alt+R: Refresh
@@ -33,15 +40,10 @@ are available:
 * Ctrl+Shift+I: Open Dev Tools for the browser window (not for the pages within.)
 * Ctrl+R: Reload the entire browser UI.
 
-## Features
-
-* Tabs
-* Separate profiles/persistent-sessions, just like with Chrome.
-* Keyboard shortcuts for basically anything you could ever want to do.
-
 To run with a profile other than "default", set the `YAEB_PROFILE` environment
-variable to whichever profile you want before starting the browser. You can
-also switch profiles programmitcally. See the API section below.
+variable to whichever profile you want before starting the browser. The profile
+for new tabs can be set with Alt+Y. You can also switch profiles
+programmitcally. See the API section below.
 
 ## Configuration
 

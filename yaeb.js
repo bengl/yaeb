@@ -2,7 +2,7 @@ require('mousetrap')
 require('mousetrap/plugins/global-bind/mousetrap-global-bind')
 
 const remote = require('electron').remote
-let urlBar
+let urlBar, profileBar
 global.yaeb = {
   profile: process.env.YAEB_PROFILE || 'default',
   newTabUrl: 'https://www.google.com',
@@ -20,6 +20,7 @@ Mousetrap.bind('alt+q', closeTab)
 Mousetrap.bind('alt+left', () => goTab(-1))
 Mousetrap.bind('alt+right', () => goTab(1))
 Mousetrap.bindGlobal('alt+u', toggleUrlBar)
+Mousetrap.bindGlobal('alt+y', toggleProfileBar)
 
 function goTab(to) {
   const n = focusedView + to > views().length - 1 ?
@@ -136,6 +137,16 @@ function toggleUrlBar() {
   }
 }
 
+function toggleProfileBar() {
+  if (profileBar.style.display !== 'block') {
+    profileBar.style.display = 'block'
+    profileBar.value = yaeb.profile
+    profileBar.focus()
+  } else {
+    profileBar.style.display = 'none'
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
   newTab()
   urlBar = document.getElementById('urlbar')
@@ -144,6 +155,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       currentView().loadURL(urlBar.value)
       tabs(focusedView).innerText = '[Loading...]'
       toggleUrlBar()
+    }
+  })
+  profileBar = document.getElementById('profilebar')
+  profileBar.addEventListener('keydown', (e) => {
+    if (e.which === 13) { // Enter
+      yaeb.profile = profileBar.value
+      toggleProfileBar()
     }
   })
 })
