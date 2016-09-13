@@ -122,10 +122,6 @@ function addTabToBar(n, view) {
   })
 }
 
-function removeTabFromBar(n) {
-  document.getElementById('tabs').removeChild(tabs(n))
-}
-
 function newTab(url) {
   const view = document.createElement('webview')
   view.setAttribute('autosize', 'on')
@@ -147,7 +143,7 @@ function closeTab(id) {
   const view = currentView()
   if (views().length === 1) return quit()
   const nextView = id === 0 ? 1 : id - 1
-  removeTabFromBar(id)
+  document.getElementById('tabs').removeChild(tabs(id))
   focusView(nextView)
   if (id === 0) focusedView = 0
   document.getElementById('webviewcontainer').removeChild(view)
@@ -182,11 +178,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
       tabs(focusedView).innerText = '[Loading...]'
       toggleUrlBar()
     }
+    if (e.which === 27) { // Esc
+      toggleUrlBar()
+    }
   })
   profileBar = document.getElementById('profilebar')
   profileBar.addEventListener('keydown', (e) => {
     if (e.which === 13) { // Enter
       yaeb.profile = profileBar.value
+      toggleProfileBar()
+    }
+    if (e.which === 27) { // Esc
       toggleProfileBar()
     }
   })
