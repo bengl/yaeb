@@ -66,3 +66,14 @@ webview {
   padding: 5px;
   display: none;
 }
+
+#searchbar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80%;
+  left: 10%;
+  border: solid green 10px;
+  padding: 5px;
+  display: none;
+}

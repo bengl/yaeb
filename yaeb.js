@@ -2,7 +2,8 @@ require('mousetrap')
 require('mousetrap/plugins/global-bind/mousetrap-global-bind')
 
 const remote = require('electron').remote
-let urlBar, profileBar
+const remoteLog = remote.getGlobal('console').log
+let urlBar, profileBar, searchBar
 
 global.yaeb = {
   profile: process.env.YAEB_PROFILE || 'default',
@@ -26,7 +27,8 @@ const keyBindingActions = {
   'tableft': () => goTab(-1),
   'tabright': () => goTab(1),
   'toggleurlbar': toggleUrlBar,
-  'toggleprofilebar': toggleProfileBar
+  'toggleprofilebar': toggleProfileBar,
+  'togglesearchbar': toggleSearchBar
 }
 const keyMap = {} // mostly for help/debug
 
@@ -46,6 +48,7 @@ keyBind('alt+left', 'tableft')
 keyBind('alt+right', 'tabright')
 keyBind('alt+u', 'toggleurlbar')
 keyBind('alt+y', 'toggleprofilebar')
+keyBind('alt+f', 'togglesearchbar')
 
 function goTab(to) {
   const n = focusedView + to > views().length - 1 ?
@@ -169,27 +172,51 @@ function toggleProfileBar() {
   }
 }
 
+function toggleSearchBar() {
+  if (searchBar.style.display !== 'block') {
+    searchBar.style.display = 'block'
+    searchBar.focus()
+  } else {
+    currentView().stopFindInPage('clearSelection');
+    searchBar.style.display = 'none'
+  }
+}
+
+// Keycodes
+const ENTER = 13, ESC = 27
+
 document.addEventListener("DOMContentLoaded", function(event) {
   newTab()
   urlBar = document.getElementById('urlbar')
   urlBar.addEventListener('keydown', (e) => {
-    if (e.which === 13) { // Enter
+    if (e.which === ENTER) { // Enter
       currentView().loadURL(urlBar.value)
       tabs(focusedView).innerText = '[Loading...]'
       toggleUrlBar()
     }
-    if (e.which === 27) { // Esc
+    if (e.which === ESC) { // Esc
       toggleUrlBar()
     }
   })
   profileBar = document.getElementById('profilebar')
   profileBar.addEventListener('keydown', (e) => {
-    if (e.which === 13) { // Enter
+    if (e.which === ENTER) { // Enter
       yaeb.profile = profileBar.value
       toggleProfileBar()
     }
-    if (e.which === 27) { // Esc
+    if (e.which === ESC) { // Esc
       toggleProfileBar()
+    }
+  })
+  searchBar = document.getElementById('searchbar')
+  searchBar.addEventListener('keyup', (e) => {
+    if (searchBar.value === '') {
+      currentView().stopFindInPage('clearSelection');
+    }
+    if (e.which === ESC) { // Esc
+      toggleSearchBar()
+    } else {
+      currentView().findInPage(searchBar.value, {findNext: e.which === ENTER})
     }
   })
 })
@@ -206,7 +233,6 @@ if (fs.existsSync(browserCss)) {
   styleTag.setAttribute('href', `file://${browserCss}`)
   document.head.appendChild(styleTag)
 }
-const remoteLog = remote.getGlobal('console').log
 remoteLog('Key Bindings')
 remoteLog('============')
 for (let action in keyMap)
