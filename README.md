@@ -13,7 +13,8 @@ default upon startup is the tabs bar.
 
 * Tabs
 * Separate profiles/persistent-sessions, just like with Chrome.
-* Keyboard shortcuts for everything.
+* User-defined eyboard shortcuts for everything.
+* No React used anywhere. Or any other frameworks, really.
 
 ## Installation
 
@@ -34,6 +35,7 @@ defaults:
 * Alt+N: Forward
 * Alt+R: Refresh
 * Alt+S: Stop
+* Alt+F: Search in Page
 
 If you start with the environment variable `DEBUG` set to anything, then these
 are available:
@@ -44,7 +46,10 @@ are available:
 To run with a profile other than "default", set the `YAEB_PROFILE` environment
 variable to whichever profile you want before starting the browser. The profile
 for new tabs can be set with Alt+Y. You can also switch profiles
-programmitcally. See the API section below.
+programmatically. See the API section below.
+
+You can also Ctrl+Click to open a link in a new tab, the same as you would in
+Chrome.
 
 ## Configuration
 
