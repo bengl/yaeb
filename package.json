@@ -12,7 +12,6 @@
 
   "author": "Bryan English <bryan@bryanenglish.com>",
   "scripts": {
-    "test": "xo",
     "start": "electron .",
     "build": "electron-packager . --out=dist --app-version=$npm_package_version --prune --asar --overwrite --all"
   },
@@ -29,14 +28,6 @@
   "devDependencies": {
     "devtron": "^1.1.0",
     "electron": "^1.0.1",
-    "electron-packager": "^7.0.0",
-    "xo": "^0.16.0"
-  },
-  "xo": {
-    "esnext": true,
-    "envs": [
-      "node",
-      "browser"
-    ]
+    "electron-packager": "^7.0.0"
   }
 }
