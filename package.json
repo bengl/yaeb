@@ -9,12 +9,11 @@
     "url": "https://github.com/bengl/yaeb/issues"
   },
   "homepage": "https://github.com/bengl/yaeb#readme",
-
   "author": "Bryan English <bryan@bryanenglish.com>",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-packager . --out=dist --app-version=$npm_package_version --prune --asar --overwrite --all"
+    "start": "electron ."
   },
+  "bin": "yaeb.sh",
   "keywords": [
     "electron-app",
     "electron",
@@ -22,12 +21,11 @@
     "minimalist"
   ],
   "dependencies": {
-    "electron-debug": "^1.0.0",
-    "mousetrap": "^1.6.0"
+    "mousetrap": "^1.6.0",
+    "electron": "^1.0.1"
   },
   "devDependencies": {
-    "devtron": "^1.1.0",
-    "electron": "^1.0.1",
-    "electron-packager": "^7.0.0"
+    "devtron": "^1.4.0",
+    "electron-debug": "^1.0.0"
   }
 }
