@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "mousetrap": "^1.6.0",
-    "electron": "^1.0.1"
+    "electron": "^9.1.0"
   },
   "devDependencies": {
     "devtron": "^1.4.0",
